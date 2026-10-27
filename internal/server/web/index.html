@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>passgen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <span class="logo">🔐 passgen</span>
+    <button id="lock-btn" class="btn" hidden>Lock vault</button>
+  </header>
+
+  <main>
+    <!-- Setup / unlock -->
+    <section id="auth" class="box narrow" hidden>
+      <h2 id="auth-title"></h2>
+      <p id="auth-hint" class="muted"></p>
+      <form id="auth-form">
+        <label>Master password
+          <input type="password" id="master" autocomplete="off" required>
+        </label>
+        <label id="confirm-row" hidden>Confirm master password
+          <input type="password" id="master2" autocomplete="off">
+        </label>
+        <p id="auth-error" class="error" role="alert"></p>
+        <button class="btn primary block" id="auth-submit"></button>
+      </form>
+    </section>
+
+    <!-- App -->
+    <div id="app" class="grid" hidden>
+      <section class="box">
+        <h2>Generator</h2>
+        <div class="output">
+          <input id="gen-output" readonly aria-label="Generated password">
+          <button id="gen-copy" class="btn">Copy</button>
+        </div>
+        <div class="meter"><div id="meter-bar"></div></div>
+        <p id="meter-text" class="muted small"></p>
+
+        <label>Length: <b id="len-label">20</b>
+          <input type="range" id="gen-length" min="4" max="128" value="20">
+        </label>
+        <div class="checks">
+          <label><input type="checkbox" id="gen-lower" checked> a–z</label>
+          <label><input type="checkbox" id="gen-upper" checked> A–Z</label>
+          <label><input type="checkbox" id="gen-digits" checked> 0–9</label>
+          <label><input type="checkbox" id="gen-symbols" checked> !@#$</label>
+          <label class="wide"><input type="checkbox" id="gen-ambiguous"> Exclude look-alikes (O 0 l 1 I)</label>
+        </div>
+        <p id="gen-error" class="error" role="alert"></p>
+        <div class="row">
+          <button id="gen-btn" class="btn primary">Generate</button>
+          <button id="gen-save" class="btn">Save to vault…</button>
+        </div>
+      </section>
+
+      <section class="box">
+        <div class="row between">
+          <h2>Vault</h2>
+          <button id="add-btn" class="btn">+ New entry</button>
+        </div>
+        <input type="search" id="search" placeholder="Search entries…" aria-label="Search">
+        <ul id="entries" class="list"></ul>
+        <p id="empty" class="muted" hidden>No entries yet.</p>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="dialog">
+    <form id="entry-form" method="dialog">
+      <h2 id="dialog-title"></h2>
+      <label>Name <input id="f-name" required></label>
+      <label>Username <input id="f-username" autocomplete="off"></label>
+      <label>Password
+        <div class="output">
+          <input id="f-password" type="password" autocomplete="new-password">
+          <button type="button" id="f-show" class="btn">Show</button>
+          <button type="button" id="f-gen" class="btn">Generate</button>
+        </div>
+      </label>
+      <label>URL <input id="f-url"></label>
+      <label>Notes <textarea id="f-notes" rows="3"></textarea></label>
+      <p id="entry-error" class="error" role="alert"></p>
+      <div class="row end">
+        <button type="button" id="f-cancel" class="btn">Cancel</button>
+        <button class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

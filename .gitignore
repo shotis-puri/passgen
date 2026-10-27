@@ -1,0 +1,28 @@
+# Binaries
+/passgen
+*.exe
+/bin/
+/dist/
+
+# Test / coverage output
+*.test
+*.out
+coverage.*
+
+# Local vault data - never commit secrets
+.passgen/
+vault.json
+vault.json.tmp
+
+# Environment files
+.env
+.env.*
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Go workspace
+go.work
+go.work.sum
