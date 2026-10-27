@@ -1,7 +1,7 @@
 # passgen
 
 A small password generator and manager written in Go with **no third-party dependencies**.
-Passwords are generated with `crypto/rand`, saved in an encrypted local vault, and managed through a simple web UI with a GitHub-style dark theme.
+Passwords are generated with `crypto/rand`, saved in an encrypted local vault.
 
 ## Quick start
 
@@ -77,8 +77,3 @@ internal/vault/              encrypted storage (+ tests)
 internal/server/             HTTP handlers
 internal/server/web/         index.html, style.css, app.js (embedded)
 ```
-
-## Security notes
-
-- Designed for **local, single-user** use. It listens on localhost by default and has no login sessions: anyone who can reach the port while the vault is unlocked can read it. Don't expose it to a network without adding TLS and authentication.
-- Lock the vault when you're done; back up `vault.json` and remember your master password.
